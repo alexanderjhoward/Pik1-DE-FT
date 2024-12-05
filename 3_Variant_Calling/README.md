@@ -90,9 +90,12 @@ With all variant calling finished, the DNA and peptide sequences were collected 
 
 ```
 
-These sequences were cleaned and assembled with the **sequence_processing.R** script. The last step taken was to conduct a multiple sequence alignment of the **Pikp_HMA_Variants_Unique.fasta** file for downstream use.
+These sequences were cleaned and assembled with the **sequence_processing.R** script. The last step taken was to conduct a multiple sequence alignment with MUSCLE on the **Pikp_HMA_Variants_Unique.fasta** file for downstream use.
 
 ```bash
 
+    muscle -in Output/Pikp1_HMA_Variants_Unique.fa -out Output/Data/Pikp1_HMA_Variants_Unique_Aligned.fa
+    sed 's/^>/\x00&/' Output/Pikp1_HMA_Variants_Unique_Aligned.fa | sort -z | tr -d '\0' | sed 's/^>..;/>/g' >  Output/Pikp1_HMA_Variants_Unique_Aligned_Formatted.fa
+    rm Output/Pikp1_HMA_Variants_Unique_Aligned.fa
 
 ```
