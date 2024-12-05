@@ -25,7 +25,7 @@ Next we obtained a list of NCBI SRA IDs from [the 3k RGP BioProject](https://www
 
 ```
 
-To rapidly determine the presence/absence of Pikp-1 variants in our dataset, one lane of reads from each rice line was aligned against the N22 genome. Output alignments were checked for read coverage within the ligand binding domain, and lines with 6 or more positions missing a read within that window were excluded from further consideration. Lines with full read coverage or missing 5 or fewer positions were retained for alignment with that line's full set of reads.
+To fit within computational constraints and more rapidly determine the presence/absence of Pikp-1 variants in our dataset, one lane of reads from each rice line was aligned against the N22 genome. These output alignments were checked for read coverage within the ligand binding domain, and lines with 6 or more positions missing a read within that window were excluded from further consideration. Lines which passed this threshold were retained for downstream alignment with their full set of reads. This approach helped narrow the number of sequence alignments we needed to do to identify variants closely related to Pikp/Pikh.
 
 ```bash
 
