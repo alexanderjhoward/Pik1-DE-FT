@@ -50,7 +50,7 @@ This subset of high-coverage rice varieties was re-aligned against the reference
 ```bash
 
     while read i; do
-        bash Scripts/bwa_pipeline_n22_full.sh $i
+        bash Scripts/bwa_pipeline_full_search.sh $i
     done < Source/N22_full_sra.txt
 
 ```
@@ -70,7 +70,7 @@ FreeBayes was used for variant calling against the reference genome and obtainin
 ```bash
 
     while read i; do
-        bash Scripts/N22_vcf_to_fa.sh $i
+        bash Scripts/vcf_to_fa.sh $i
     done < Source/N22_full_vcf.txt
 
 ```
@@ -80,7 +80,7 @@ After conducting our G2P anallysis, we identified two variants ("SHZ-2" and "VK"
 ```bash
 
     while read i; do
-        bash Scripts/Vars_vcf_to_fa.sh $i
+        bash Scripts/vcf_to_fa_full_seq.sh $i
     done < Source/vars_sra.txt
 
 ```
