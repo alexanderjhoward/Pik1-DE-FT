@@ -1,4 +1,4 @@
-# Modeling *Pikh-1* directed evolution data
+# Modeling Pikh-1 directed evolution data
 
 ## Background
 We wanted to explore how well we could correlate sequence varation with ligand binding through protein language modeling. For this project, we utilized the ESM-2 protein language model and compared the performance of models which were generated through fine-tuning versus transfer learning.  
