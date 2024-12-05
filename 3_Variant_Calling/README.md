@@ -1,7 +1,7 @@
 # Calling *Pik-1* variants from the 3,000 Rice Genomes Project
 
 ## Background
-With our fine-tuned models finished, we wanted to apply them towards the phenotyping of naturally-evolved receptor variants. Out approach was to identify *Pik-1* ligand binding domain variants within the 3,000 Rice Genomes Project dataset with complete read coverage in the *Pik-1* ligand binding domain and use those samples for variant calling. Later on in the project we also do variant calling on the full-length *Pik-1* and *Pik-2* receptors to synthesize them for agroinfiltration HR assays. 
+With our fine-tuned models finished, we wanted to apply them towards the phenotyping of naturally-evolved receptor variants. Out approach was to identify *Pik-1* ligand binding domain variants within the 3,000 Rice Genomes Project dataset with complete read coverage against a reference *Pik-1* allele and use those samples for variant calling. Later on in the project we also do variant calling on the full-length *Pik-1* and *Pik-2* receptor sequences to synthesize them for agroinfiltration HR assays. 
 
 ## Method
 I used BWA for read alignment. I started by indexing our reference genome N22, which posesses a known *Pik-1* alelle (Pikp-1) that is very closely related to the allele we used in directed evolution (Pikh-1).
