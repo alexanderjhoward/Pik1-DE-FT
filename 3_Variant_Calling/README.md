@@ -65,7 +65,7 @@ Like last time, the list of successful alignments was collected. This time aroun
 
 ```
 
-FreeBayes was used to do variant calling against the reference genome and obtain *Pik-1* sequence variants.
+FreeBayes was used for variant calling against the reference genome and obtaining *Pik-1* sequence variants.
 
 ```bash
 
@@ -75,7 +75,7 @@ FreeBayes was used to do variant calling against the reference genome and obtain
 
 ```
 
-After conducting our G2P anallysis, two variants ("SHZ-2" and "VK") which showed promise for enhanced ligand recognition. The SRAs of rice lines with either of these ligand binding domain variants were saved to a shortlist for variant calling, named **vars_sra.txt** which is found in the "Source" directory. This list was then used to do variant calling on the preexisting sequence alignments we generated already, just along the full *Pik-1* and *Pik-2* sequences.
+After conducting our G2P anallysis, we identified two variants ("SHZ-2" and "VK") with promising enhanced Avr-PikC recognition. The SRAs of rice lines with either of these ligand binding domain variants were saved to a shortlist for variant calling, named **vars_sra.txt** which is found in the "Source" directory. This list was then used to do variant calling along the full *Pik-1* and *Pik-2* sequences using the sequence alignments we already generated.
 
 ```bash
 
@@ -93,7 +93,7 @@ With all variant calling finished, the DNA and peptide sequences were collected 
 
 ```
 
-These sequences were cleaned and assembled with the **sequence_processing.R** script. The last step taken was to conduct a multiple sequence alignment with MUSCLE on the **Pikp_HMA_Variants_Unique.fasta** file for downstream use.
+These sequences were cleaned and assembled with the **sequence_processing.R** script. The last step was to conduct a multiple sequence alignment with MUSCLE on the **Pikp_HMA_Variants_Unique.fasta** file for downstream use.
 
 ```bash
 
