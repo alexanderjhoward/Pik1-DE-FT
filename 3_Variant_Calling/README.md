@@ -4,15 +4,18 @@
 With our fine-tuned models finished, we wanted to apply them towards the phenotyping of naturally-evolved receptor variants. Out approach was to identify *Pik-1* ligand binding domain variants within the 3,000 Rice Genomes Project dataset with complete read coverage against a reference *Pik-1* allele and use those samples for variant calling. Later on in the project we also do variant calling on the full-length *Pik-1* and *Pik-2* receptor sequences to synthesize them for agroinfiltration HR assays. 
 
 ## Method
-I used BWA for read alignment. I started by indexing our reference genome N22, which posesses a known *Pik-1* alelle (Pikp-1) that is very closely related to the allele we used in directed evolution (Pikh-1).
 
- ```bash
+We started by downloading the N-22 reference rice genome, which posesses a known *Pik-1* alelle (Pikp-1) that is very closely related to the allele we used in directed evolution (Pikh-1). This genome was then indexed. 
 
-    bwa index -p Sequencing/Reference_Data/N22 ../1_Create_Databases/GenomeDB/N22/GCA_001952365.3_OsN22RS2_genomic.fna
+```bash
+
+    wget -P Source/N22/  https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/952/365/GCA_001952365.3_OsN22RS2/GCA_001952365.3_OsN22RS2_genomic.fna.gz
+    gunzip Source/N22/GCA_001952365.3_OsN22RS2_genomic.fna.gz
+    bwa index -p Sequencing/Reference_Data/N22 Source/N22/GCA_001952365.3_OsN22RS2_genomic.fna
 
 ```
 
-Next we obtained a list of NCBI IDs to download our sample reads from. I went to the 3k RGP BioProject and [retreived all listed SRAs](https://www.ncbi.nlm.nih.gov/biosample?Db=biosample&DbFrom=bioproject&Cmd=Link&LinkName=bioproject_biosample&LinkReadableName=BioSample&ordinalpos=1&IdsFromResult=262761). To do this, I chose "Send to" > "File" > "Accessions List" and downloaded the resulting file, named **biosample_result.txt**. After reformatting this file, I saved it as **sra.txt**, which is available in the "Source" directory already.
+Next we obtained a list of NCBI SRA IDs from [the 3k RGP BioProject](https://www.ncbi.nlm.nih.gov/biosample?Db=biosample&DbFrom=bioproject&Cmd=Link&LinkName=bioproject_biosample&LinkReadableName=BioSample&ordinalpos=1&IdsFromResult=262761) to download our sample reads. To do this, I chose "Send to" > "File" > "Accessions List" and downloaded the resulting file, named **biosample_result.txt**. After reformatting this file, I saved it as **sra.txt**, which is available in the "Source" directory already.
 
 ```bash
 
