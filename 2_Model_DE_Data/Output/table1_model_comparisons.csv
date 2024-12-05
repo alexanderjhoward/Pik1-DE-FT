@@ -1,0 +1,9 @@
+Model,Ligand,Spearman,Significance
+CatBoost,AvrPikC,0.809528233,2.23E-48
+Linear Regression,AvrPikC,0.828883083,1.34E-52
+SVR,AvrPikC,0.702831967,1.48E-31
+Finetuned ESM-2,AvrPikC,0.867815855,5.73E-63
+CatBoost,AvrPikF,0.769519235,1.28E-40
+Linear Regression,AvrPikF,0.803623537,9.88E-47
+SVR,AvrPikF,0.574249679,4.99E-19
+Finetuned ESM-2,AvrPikF,0.855387386,9.31E-59

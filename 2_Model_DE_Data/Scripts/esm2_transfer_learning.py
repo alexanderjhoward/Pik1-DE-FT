@@ -1,0 +1,97 @@
+# Specify GPU
+import torch
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Set model and seed to be used
+model_checkpoint = "facebook/esm2_t6_8M_UR50D"
+seed = 42
+
+# Create an empty dataframe to save results to
+import pandas as pd
+df = pd.DataFrame(columns=['Model', 'Ligand', 'Spearman', 'Significance'])
+
+# Loop over Avr-PikC and Avr-PikF datasets to generate fine-tuned ESM-2 models
+ligands = ["AvrPikC", "AvrPikF"]
+for x in ligands:
+
+    # Import embedding data
+    train = pd.read_csv(f'../Output/{x}/train_embeddings.csv')
+    val = pd.read_csv(f'../Output/{x}/val_embeddings.csv')
+
+    # Separate features and labels
+    X_train = train.drop(['hma', 'enrichment'], axis=1)
+    y_train = train['enrichment']
+    X_validation = val.drop(['hma', 'enrichment'], axis=1)
+    y_validation = val['enrichment']
+
+    ### Gradient-boosted decision tree
+    # Define model
+    from catboost import CatBoostRegressor, Pool, metrics, cv
+    from sklearn.metrics import accuracy_score
+    params = {
+        'iterations': 1000,
+        'random_seed': seed,
+        'use_best_model': True,
+        'od_type': 'Iter',
+        'od_wait': 40,  # early stop after 40 rounds of non-improvement of validation loss
+        'task_type': 'GPU'
+    }
+    train_pool = Pool(X_train, y_train)
+    validate_pool = Pool(X_validation, y_validation)
+    model = CatBoostRegressor(**params)
+
+    # Fit model
+    model.fit(train_pool, eval_set=validate_pool)
+
+    # Predict with model
+    predictions = model.predict(X_validation)
+    cb_output_df = pd.concat([val.reset_index(), pd.DataFrame(predictions, columns=['Predicted_Enrichment'])], axis=1, join='outer')
+
+    # Calculate Spearman R
+    from scipy.stats import spearmanr
+    cb_r,cb_p = spearmanr(cb_output_df['enrichment'], cb_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "CatBoost", 'Ligand': x, 'Spearman': [cb_r], 'Significance': [cb_p]})], ignore_index=True)
+
+    ### Linear regression
+    # Define model
+    from sklearn.linear_model import LinearRegression
+    model = LinearRegression()
+
+    # Fit model
+    model.fit(X_train, y_train)
+
+    # Predict with model
+    predictions = model.predict(X_validation)
+    lr_output_df = pd.concat([val.reset_index(), pd.DataFrame(predictions, columns=['Predicted_Enrichment'])], axis=1, join='outer')
+
+    # Calculate Spearman R
+    lr_r,lr_p = spearmanr(lr_output_df['enrichment'], lr_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "Linear Regression", 'Ligand': x, 'Spearman': [lr_r], 'Significance': [lr_p]})], ignore_index=True)
+
+    ### SVR
+    # Define model
+    from sklearn import svm
+    model = svm.SVR()
+
+    # Fit model
+    model.fit(X_train, y_train)
+
+    # Predict with model
+    predictions = model.predict(X_validation)
+    svr_output_df = pd.concat([val.reset_index(), pd.DataFrame(predictions, columns=['Predicted_Enrichment'])], axis=1, join='outer')
+
+    # Calculate Spearman R
+    svr_r,svr_p = spearmanr(svr_output_df['enrichment'], svr_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "SVR", 'Ligand': x, 'Spearman': [svr_r], 'Significance': [svr_p]})], ignore_index=True)
+
+    ### ESM-2 fine-tuned model
+
+    # Load in predictions
+    ft_output_df = pd.read_csv(f'../Output/{x}/esm2_t6_8M_UR50D_regression_predictions.csv')
+
+    # Calculate Spearman R
+    ft_r,ft_p = spearmanr(ft_output_df['enrichment'], ft_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "Finetuned ESM-2", 'Ligand': x, 'Spearman': [ft_r], 'Significance': [ft_p]})], ignore_index=True)
+
+# Save results
+df.to_csv('../Output/table1_model_comparisons.csv', index=False)
