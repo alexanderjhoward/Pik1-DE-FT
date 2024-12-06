@@ -63,7 +63,7 @@ This subset of high-coverage rice varieties was re-aligned against the reference
 
 ```
 
-Like last time, the list of successful alignments was collected. This time around, we only kept results from lines with full coverage along the ligand binding domain for variant calling.
+A list of lines with full coverage along the ligand binding domain was collected for variant calling.
 
 ```bash
 
@@ -73,7 +73,7 @@ Like last time, the list of successful alignments was collected. This time aroun
 
 ```
 
-FreeBayes was used for variant calling against the reference genome and obtaining *Pik-1* sequence variants.
+FreeBayes was used to call *Pik-1* variants relative to the reference Pikp sequence.
 
 ```bash
 
