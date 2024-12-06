@@ -5,7 +5,15 @@ With our fine-tuned models finished, we wanted to apply them towards the phenoty
 
 ## Method
 
-We started by downloading the N-22 reference rice genome, which posesses a known *Pik-1* alelle (Pikp-1) that is very closely related to the allele we used in directed evolution (Pikh-1). This genome was then indexed. 
+Start by creating and activating a conda environment with all necessary dependencies.
+```bash
+
+    conda env create -f environment.yml
+    conda activate 3kRGP_VC
+
+```
+
+We next downloaded the N22 reference rice genome which posesses a known *Pik-1* alelle (Pikp-1) that is very closely related to the allele we used in directed evolution (Pikh-1). This genome was then indexed. 
 
 ```bash
 
