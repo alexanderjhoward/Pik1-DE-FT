@@ -1,4 +1,4 @@
-# Directed evolution and fine-tuning of *Pik-1* ligand binding behavior
+# Modeling *Pik-1* directed evolution data with fine-tuned ESM-2 models to phenotype naturally-evolved *Pik-1* variants
 This repository contains all scripts necessary to reproduce the analysis conducted in the paper "Combining Directed Evolution with Machine Learning Enables Accurate Genotype-to-Phenotype Predictions on Rare Receptor-Ligand Recognition Profiles".
 
 ## Overview
