@@ -50,7 +50,11 @@ for x in ligands:
     # Calculate Spearman R
     from scipy.stats import spearmanr
     cb_r,cb_p = spearmanr(cb_output_df['enrichment'], cb_output_df['Predicted_Enrichment'])
-    df = pd.concat([df, pd.DataFrame({'Model': "CatBoost", 'Ligand': x, 'Spearman': [cb_r], 'Significance': [cb_p]})], ignore_index=True)
+    
+    # Calculate RMSD
+    from sklearn.metrics import root_mean_squared_error
+    cb_rmse = root_mean_squared_error(cb_output_df['enrichment'], cb_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "CatBoost", 'Ligand': x, 'Spearman': [cb_r], 'Significance': [cb_p], 'RMSE': [cb_rmse]})], ignore_index=True)
 
     ### Linear regression
     # Define model
@@ -66,7 +70,10 @@ for x in ligands:
 
     # Calculate Spearman R
     lr_r,lr_p = spearmanr(lr_output_df['enrichment'], lr_output_df['Predicted_Enrichment'])
-    df = pd.concat([df, pd.DataFrame({'Model': "Linear Regression", 'Ligand': x, 'Spearman': [lr_r], 'Significance': [lr_p]})], ignore_index=True)
+    
+    # Calculate RMSD
+    lr_rmse = root_mean_squared_error(lr_output_df['enrichment'], lr_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "Linear Regression", 'Ligand': x, 'Spearman': [lr_r], 'Significance': [lr_p], 'RMSE': [lr_rmse]})], ignore_index=True)
 
     ### SVR
     # Define model
@@ -82,16 +89,21 @@ for x in ligands:
 
     # Calculate Spearman R
     svr_r,svr_p = spearmanr(svr_output_df['enrichment'], svr_output_df['Predicted_Enrichment'])
-    df = pd.concat([df, pd.DataFrame({'Model': "SVR", 'Ligand': x, 'Spearman': [svr_r], 'Significance': [svr_p]})], ignore_index=True)
+    
+    # Calculate RMSD
+    svr_rmse = root_mean_squared_error(svr_output_df['enrichment'], svr_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "SVR", 'Ligand': x, 'Spearman': [svr_r], 'Significance': [svr_p], 'RMSE': [svr_rmse]})], ignore_index=True)
 
     ### ESM-2 fine-tuned model
-
     # Load in predictions
     ft_output_df = pd.read_csv(f'../Output/{x}/esm2_t6_8M_UR50D_regression_predictions.csv')
 
     # Calculate Spearman R
     ft_r,ft_p = spearmanr(ft_output_df['enrichment'], ft_output_df['Predicted_Enrichment'])
-    df = pd.concat([df, pd.DataFrame({'Model': "Finetuned ESM-2", 'Ligand': x, 'Spearman': [ft_r], 'Significance': [ft_p]})], ignore_index=True)
+
+    # Calculate RMSD
+    ft_rmse = root_mean_squared_error(ft_output_df['enrichment'], ft_output_df['Predicted_Enrichment'])
+    df = pd.concat([df, pd.DataFrame({'Model': "Finetuned ESM-2", 'Ligand': x, 'Spearman': [ft_r], 'Significance': [ft_p], 'RMSE': [ft_rmse]})], ignore_index=True)
 
 # Save results
 df.to_csv('../Output/table1_model_comparisons.csv', index=False)
