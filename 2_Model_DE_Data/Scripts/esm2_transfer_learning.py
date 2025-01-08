@@ -58,8 +58,8 @@ for x in ligands:
 
     ### Linear regression
     # Define model
-    from sklearn.linear_model import LinearRegression
-    model = LinearRegression()
+    from sklearn.linear_model import ElasticNetCV
+    model = ElasticNetCV(random_state=seed)
 
     # Fit model
     model.fit(X_train, y_train)
@@ -73,7 +73,7 @@ for x in ligands:
     
     # Calculate RMSD
     lr_rmse = root_mean_squared_error(lr_output_df['enrichment'], lr_output_df['Predicted_Enrichment'])
-    df = pd.concat([df, pd.DataFrame({'Model': "Linear Regression", 'Ligand': x, 'Spearman': [lr_r], 'Significance': [lr_p], 'RMSE': [lr_rmse]})], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame({'Model': "ElasticNet Regression", 'Ligand': x, 'Spearman': [lr_r], 'Significance': [lr_p], 'RMSE': [lr_rmse]})], ignore_index=True)
 
     ### SVR
     # Define model
