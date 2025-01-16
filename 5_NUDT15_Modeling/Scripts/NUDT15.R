@@ -3,22 +3,14 @@ library(rstudioapi)
 setwd(dirname(getActiveDocumentContext()$path))
 library(tidyverse)
 library(seqinr)
-library(ggpubr)
-library(caret)
-library(stringr)
-library(RColorBrewer)
 
 # Load and save  wt information
-wt <- read.csv(file='NUDT15.csv') %>%
+wt <- read.csv(file='../Source/NUDT15.csv') %>%
   filter(Info=="WT")
 wtseq <- wt$Protein[1]
 rm(wt)
 
-# List of variants with known clinical phenotypes
-## Toxic variants according to literature search
-# Source 1: https://www.nature.com/articles/ng.3508
-# Source 2: https://jamanetwork.com/journals/jama/fullarticle/2725687
-# Source 3: https://pmc.ncbi.nlm.nih.gov/articles/PMC7071893/#sec11
+# List of variants with known clinical phenotypes collected from literature search (found in Source directory)
 toxic <- c('Arg139Cys', 'Arg139His', 'Lys33Glu', 'Arg34Thr', 'Val75Gly')
 toxic_df <- as.data.frame(toxic) %>%
   separate(toxic, into = c("wt_res", "intermediate"), sep = "(?<=[A-Za-z])(?=[0-9])") %>%
@@ -54,7 +46,7 @@ substring(toxic_df[8,4], 139+2, 139+2) <- "C"
 #WT
 benign_df <- rbind(benign_df, data.frame(wt_res="", pos=0, mut_res="", seq=wtseq, effect="Benign"))
 # Collect allele count info from genomAD
-genomad <- read.csv('gnomAD_v4.1.0_ENSG00000136159_2025_01_13_14_21_37.csv') %>%
+genomad <- read.csv('../Source/gnomAD_v4.1.0_ENSG00000136159_2025_01_13_14_21_37.csv') %>%
   mutate(Protein.Consequence = gsub('^p.', '', Protein.Consequence))
 genomadvars <- subset(genomad, genomad$Protein.Consequence %in% c(toxic, benign)) %>%
   select(Protein.Consequence, Allele.Count, Allele.Frequency) %>%
@@ -185,27 +177,36 @@ rm(genomad_missense, genomad_dels, genomad_ins, genomad_range_del, genomad_range
 
 # Load and clean data
 # Adjust scoring such that all wild-type sequences are positive values and all LOF sequences are negative values
-df <- read.csv(file='NUDT15.csv') %>%
+df <- read.csv(file='../Source/NUDT15.csv') %>%
   drop_na(Final.NUDT15.activity.Score) %>%
   mutate(Score=Final.NUDT15.activity.Score) %>%
   select(Protein, Score, Final_classification) %>% # After calculating scores, only keep sequences that have more than n reads in the starting or ending library
   mutate(Score = log(Score + 0.55)) %>% # Minimum cut-off for wt-like activity set by authors was 0.45, so add 0.55 to make all wt-like activity >= 1
   filter(!(Protein %in% variants$seq)) %>%
   mutate(bin = ntile(Score, round(n()/100, digits = 0)))
-write.csv(df, file='NUDT15_cleaned_adj.csv', row.names = F)
+write.csv(df, file='../Output/Data/NUDT15_cleaned_adj.csv', row.names = F)
 
 # Remove any genomAD variants that have been already tested in this assay
 genomad_vars <- genomad_vars %>%
   filter(!(seq %in% df$Protein))
 full_vars <- rbind(variants, genomad_vars)
 rm(variants, genomad_vars)
-write.csv(full_vars, file='NUDT15_variants.csv', row.names = F)
+write.csv(full_vars, file='../Output/Data/NUDT15_variants.csv', row.names = F)
+
+
+
+
+
 
 
 #################
 # After modeling#
 #################
 
+library(ggpubr)
+library(caret)
+library(stringr)
+library(RColorBrewer)
 
 # Plot predictions on validation data
 preds <- read.csv('esm2_t6_8M_UR50D_regression_predictions.csv') %>% 
