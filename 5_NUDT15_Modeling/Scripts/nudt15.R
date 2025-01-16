@@ -184,7 +184,7 @@ df <- read.csv(file='../Source/NUDT15.csv') %>%
   mutate(Score = log(Score + 0.55)) %>% # Minimum cut-off for wt-like activity set by authors was 0.45, so add 0.55 to make all wt-like activity >= 1
   filter(!(Protein %in% variants$seq)) %>%
   mutate(bin = ntile(Score, round(n()/100, digits = 0)))
-write.csv(df, file='../Output/Data/NUDT15_cleaned_adj.csv', row.names = F)
+write.csv(df, file='../Output/Data/NUDT15_cleaned.csv', row.names = F)
 
 # Remove any genomAD variants that have been already tested in this assay
 genomad_vars <- genomad_vars %>%
