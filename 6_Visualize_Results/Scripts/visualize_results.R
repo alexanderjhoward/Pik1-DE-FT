@@ -132,7 +132,7 @@ ggsave('../Output/Fig2b.png', pES_heatmap_plot, height = 35, width = 25, units="
 
 
 
-### Figure 3: Fine-tuned ESM-2 model performance on NUDT15 data
+### Figure 4: Fine-tuned ESM-2 model performance on NUDT15 data
 
 # Plot predictions on validation data
 preds <- read.csv('../../5_NUDT15_Modeling/Output/esm2_t6_8M_UR50D_regression_predictions.csv') %>% 
