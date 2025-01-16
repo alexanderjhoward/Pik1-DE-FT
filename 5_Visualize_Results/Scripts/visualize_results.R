@@ -6,6 +6,7 @@ if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install("ggmsa")
 library(ggmsa)
+library(ggpubr)
 
 ### Figure 1: Fine-tuned ESM-2 model performance on validation data
 
