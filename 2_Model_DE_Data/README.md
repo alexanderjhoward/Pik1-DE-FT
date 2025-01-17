@@ -4,7 +4,7 @@
 We wanted to explore how well we could correlate sequence varation with ligand binding through protein language modeling. For this project, we utilized the ESM-2 protein language model and compared the performance of models which were generated through fine-tuning versus transfer learning.  
 
 ## Method
-The **esm2_average_feature_extraction.py** script was used to extract the embeddings of each sequence in our Avr-PikC and Avr-PikF data (maintaining the same train/validation split as our fine-tuned models for ease of cross comparison). These embeddings were averaged across the all amino acid positions to reduce the feature dimensionality.
+The **esm2_average_feature_extraction.py** script was used to extract the embeddings of each sequence in our Avr-PikC and Avr-PikF data (maintaining the same random train/validation split as to be used in our fine-tuned models). These embeddings were averaged across the all amino acid positions to reduce the feature dimensionality.
 
 The **cluster_split.R** script was used to manually do a train/validation split of the Avr-PikC and Avr-PikF data based on the embedding latent space.
 
