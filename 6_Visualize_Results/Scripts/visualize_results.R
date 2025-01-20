@@ -11,7 +11,8 @@ library(caret)
 library(stringr)
 library(RColorBrewer)
 
-
+#From Color Universal Design (CUD): https://jfly.uni-koeln.de/color/
+Okabe_Ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#000000")
 
 ### Figure 1: Fine-tuned ESM-2 model performance on validation data
 
@@ -19,9 +20,11 @@ library(RColorBrewer)
 pikc_pred <- read.csv('../../2_Model_DE_Data/Output/AvrPikC/esm2_t6_8M_UR50D_regression_predictions.csv')
 pikf_pred <- read.csv('../../2_Model_DE_Data/Output/AvrPikF/esm2_t6_8M_UR50D_regression_predictions.csv')
 pikc_pred <- pikc_pred %>% 
-  mutate("Binding" = ifelse(enrichment > 0, "Positive", "Negative"))
+  mutate(Binding = ifelse(enrichment > 0, "Enriched", "Depleted")) %>%
+  mutate(Binding = factor(Binding, levels = c("Enriched", "Depleted")))
 pikf_pred <- pikf_pred %>% 
-  mutate("Binding" = ifelse(enrichment > 0, "Positive", "Negative"))
+  mutate("Binding" = ifelse(enrichment > 0, "Enriched", "Depleted")) %>%
+  mutate(Binding = factor(Binding, levels = c("Enriched", "Depleted")))
 
 # Scatterplot of Avr-PikC predictions
 pikc_pred_plot <- ggplot(pikc_pred, aes(enrichment, Predicted_Enrichment)) + 
@@ -32,7 +35,7 @@ pikc_pred_plot <- ggplot(pikc_pred, aes(enrichment, Predicted_Enrichment)) +
   scale_y_continuous(expand = c(0.01, 0.01)) +
   xlab("Enrichment score (ES)") +
   ylab("Predicted enrichment score (pES)") +
-  scale_fill_manual(values = c("#FC8D62","#66C2A5")) + 
+  scale_fill_manual(values = c("#56B4E9", "#FC8D62")) +
   labs(fill="Sequence enrichment\nunder 1 \U03BCM Avr-PikC\nselection") +
   theme_bw() + 
   theme(axis.line = element_line(color='black'),
@@ -60,7 +63,7 @@ pikf_pred_plot <- ggplot(pikf_pred, aes(enrichment, Predicted_Enrichment)) +
   scale_y_continuous(expand = c(0.01, 0.01)) +
   xlab("Enrichment score (ES)") +
   ylab("Predicted enrichment score (pES)") +
-  scale_fill_manual(values = c("#FC8D62","#66C2A5")) + 
+  scale_fill_manual(values = c("#56B4E9", "#FC8D62")) +
   labs(fill="Sequence enrichment\nunder 1 \U03BCM Avr-PikF\nselection") +
   theme_bw() + 
   theme(axis.line = element_line(color='black'),
@@ -110,7 +113,7 @@ rm(pES_C, pES_F, seq_order)
 pES_heatmap_plot <- ggplot(pES_heatmap, aes(Ligand, Variety, fill= pES)) + 
   geom_tile(color='white') +
   geom_text(aes(label=sprintf("%0.2f", pES)), color = "black", size = 1.45) +
-  scale_fill_gradient2(low = "#FC8D62", midpoint = 0, mid = "white", high = "#66C2A5") +
+  scale_fill_gradient2(low = "#FC8D62", midpoint = 0, mid = "white", high = "#56B4E9") +
   scale_x_discrete(expand = c(0.01, 0.01)) +
   scale_y_discrete(expand = c(0.01, 0.01)) +
   coord_cartesian(expand = F) +
@@ -145,7 +148,7 @@ pred_plot <- ggplot(preds, aes(Score, Predicted_Score)) +
   scale_y_continuous(breaks = c(-0.6, -0.4, -0.2, 0, 0.2, 0.4), expand = c(0.01, 0.01)) +
   xlab("Functionality score (FS)") +
   ylab("Predicted functionality score (pFS)") +
-  scale_fill_manual(values = c("#66C2A5","#FC8D62")) + 
+  scale_fill_manual(values = c("#56B4E9","#FC8D62")) + 
   labs(fill="NUDT15 functionality") +
   theme_bw() + 
   theme(axis.line = element_line(color='black'),
@@ -199,7 +202,7 @@ rm(clin_vars_pred, clin_vars_true)
 clin_vars_heatmap_plot <- ggplot(clin_vars_heatmap, aes(group, variant, fill= Score)) + 
   geom_tile(color='white') +
   geom_text(aes(label=sprintf("%0.2f", Score)), color = "black", size = 2.5) +
-  scale_fill_gradient2(low = "#FC8D62", midpoint = 0, mid = "white", high = "#66C2A5") +
+  scale_fill_gradient2(low = "#FC8D62", midpoint = 0, mid = "white", high = "#56B4E9") +
   scale_x_discrete(expand = c(0.01, 0.01)) +
   scale_y_discrete(expand = c(0.01, 0.01)) +
   coord_cartesian(expand = F) +
