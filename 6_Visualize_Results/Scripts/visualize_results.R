@@ -11,9 +11,6 @@ library(caret)
 library(stringr)
 library(RColorBrewer)
 
-#From Color Universal Design (CUD): https://jfly.uni-koeln.de/color/
-Okabe_Ito <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#000000")
-
 ### Figure 1: Fine-tuned ESM-2 model performance on validation data
 
 # Load validation predictions
@@ -184,19 +181,19 @@ clin_vars_true <- var_preds %>%
   mutate(variant = gsub("WT", "Wild type", variant)) %>%
   arrange(effect) %>%
   select(variant, effect, Score) %>%
-  mutate(group = "FS")
+  mutate(group = "Functionality\nscore (FS)")
 clin_vars_pred <- var_preds %>%
   filter(effect %in% c("Benign", "Toxic")) %>%
   mutate(variant = gsub("WT", "Wild type", variant)) %>%
   arrange(effect) %>%
   mutate(Score = Predicted_Score) %>%
   select(variant, effect, Score) %>%
-  mutate(group = "pFS")
+  mutate(group = "Predicted\nfunctionality\nscore (pFS)")
 clin_vars_heatmap <- rbind(clin_vars_true, clin_vars_pred) %>%
   mutate(variant = factor(variant, levels = rev(c('Wild type', 'Q6E', 'V18I', 'V93I', 'R11Q', 'S83Y', 
                                                   'K33E', 'R139H', 'R139C', 'R34T', 'V75G', 'G17V18del', 
                                                   'G17V18dup', 'G17V18dup/R139C')))) %>%
-  mutate(group = factor(group, levels = c('FS', 'pFS')))
+  mutate(group = factor(group, levels = c('Functionality\nscore (FS)', 'Predicted\nfunctionality\nscore (pFS)')))
 rm(clin_vars_pred, clin_vars_true)
 ## Plot a heatmap comparing function scoring and model scoring of each clinical variant
 clin_vars_heatmap_plot <- ggplot(clin_vars_heatmap, aes(group, variant, fill= Score)) + 
@@ -212,14 +209,14 @@ clin_vars_heatmap_plot <- ggplot(clin_vars_heatmap, aes(group, variant, fill= Sc
         axis.title.x=element_blank(),
         axis.text.x=element_text(size=7),
         plot.margin=unit(c(1,1,9,4),"mm"),
-        legend.position = c(0.33,-0.2), 
+        legend.position = c(0.33,-0.32), 
         legend.direction = "horizontal",
         legend.margin=margin(t = 0, unit='cm'),
         legend.key.width = unit(1.15,"line"),
         legend.key.height = unit(0.35,"line"),
         legend.text = element_text(size=7), 
         legend.title = element_text(size=7))
-ggsave('../Output/Fig4b.png', clin_vars_heatmap_plot, height = 58, width = 60, units="mm", dpi=1000)
+ggsave('../Output/Fig4b.png', clin_vars_heatmap_plot, height = 65, width = 60, units="mm", dpi=1000)
 
 # Plot model scoring of variants with no known clinical characterization or function score
 unchar_preds <- var_preds %>%
