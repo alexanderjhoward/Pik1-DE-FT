@@ -1,5 +1,5 @@
 # Modeling *Pik-1* directed evolution data with fine-tuned ESM-2 models to phenotype naturally-evolved *Pik-1* variants
-This repository contains all scripts and data necessary to reproduce the analysis conducted in the paper "Combining Directed Evolution with Machine Learning Enables Accurate Genotype-to-Phenotype Predictions on Rare Receptor-Ligand Recognition Profiles".
+This repository contains all scripts used in the paper "Combining Directed Evolution with Machine Learning Enables Accurate Genotype-to-Phenotype Predictions".
 
 ## Overview
 1. [Format directed evolution data](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/1_Format_DE_Data): Sequencing data from our starting yeast surface display library and post-selection libraries was cleaned and processed to calculate an enrichment score (ES) for each *Pik-1* sequence variant which quantifies the relative change in variant abundance following fluorescence-activated cell sorting.
