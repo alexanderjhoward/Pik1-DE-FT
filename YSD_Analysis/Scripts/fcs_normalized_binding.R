@@ -11,7 +11,7 @@ library(rstudioapi)
 setwd(dirname(getActiveDocumentContext()$path))
 
 # Step 1: Set up script and load FACS data
-FCS_DIR <- "../Data/FACS"
+FCS_DIR <- "../Source/FACS"
 OUT_DIR <- "../Output/FACS"
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
