@@ -8,7 +8,7 @@ REFERENCE <- "Pikh-1"
 SIGNAL_STAT <- "mean"
 
 ## Step 1: Read and format data
-FILES <- list.files("../Data/YSD", pattern = "^per_cell\\.csv$", recursive = TRUE, full.names = TRUE)
+FILES <- list.files("../Source/YSD", pattern = "^per_cell\\.csv$", recursive = TRUE, full.names = TRUE)
 names(FILES) <- basename(dirname(dirname(FILES)))
 GENOTYPE_LEVELS <- c("pikh"="Pikh-1", "vel"="VK", "san"="SHZ-2")
 LIGAND_LEVELS  <- c("a" = "Avr-PikA", "c" = "Avr-PikC")
