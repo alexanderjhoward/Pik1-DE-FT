@@ -2,7 +2,7 @@
 This repository contains all scripts used in the paper "Combining Directed Evolution with Machine Learning Enables Accurate Genotype-to-Phenotype Predictions".
 
 ## Data
-Source data for modeling can be found at Zenodo DOI 10.5281/zenodo.24174238. To reproduce our modeling/figures, download our data from Zenodo and place in the following directories:
+Source data can be found at Zenodo (DOI:10.5281/zenodo.24174238). To reproduce our modeling/figures, download our data from Zenodo and place in the following directories:
 * Pik1_DEFT_Source_Data.zip (unzipped) in Data/source
 * YSD_Analysis_Source_Data.zip (unzipped) in YSD_Analysis/Data
 
