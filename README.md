@@ -12,6 +12,7 @@ All analyses were completed in R or Python. RStudio was used to run the R script
 ## Outputs
 Model embeddings, weights, and figures can be found at Zenodo (DOI:10.5281/zenodo.24174238). To collect these script outputs, download our data from Zenodo and place in the following directories:
 * Pik1_DEFT_Outputs.zip (unzipped) in Outputs/
+* YSD_Analysis_Outputs.zip (unzipped) in YSD_Analysis/Output/
 
 ## Overview
 1. [Pik-1 variant calling](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/3kRGP): The 3,000 Rice Genomes Project dataset was searched for uncharacterized variants of the Pik-1 HMA domain to phenotype with our modeling.
