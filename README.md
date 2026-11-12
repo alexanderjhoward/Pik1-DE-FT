@@ -11,5 +11,5 @@ All analyses were completed in R or Python. RStudio was used to run the R script
 
 ## Overview
 1. [Pik-1 variant calling](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/3kRGP): The 3,000 Rice Genomes Project dataset was searched for uncharacterized variants of the Pik-1 HMA domain to phenotype with our modeling.
-2. [Model directed evolution data](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/Pik1_DE-FT.ipynb): The protein language model ESM-2 was used to model Pik-1 binding against Avr-PikC and Avr-PikF. This modeling approach was also tested on the human enzyme NUDT15. Model performance is compared and visualized with this script.
+2. [Model directed evolution data](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/Pik1_DE-FT.ipynb): The protein language model ESM-2 was used to model Pik-1 binding against Avr-PikC and Avr-PikF (as measured through prior directed evolution of the Pik-1 receptor). This modeling approach was also tested on the human enzyme NUDT15. Model approaches are compared and visualized with this script.
 3. [YSD Pik-1 phenotyping](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/YSD_Analysis): Pik-1 HMA domains of interest were tested for binding against Avr-Pik in YSD and imaged/sorted to quantify relative binding against each effector variant. Phenotyping results are visualized with this script.
