@@ -3,11 +3,15 @@ This repository contains all scripts used in the paper "Combining Directed Evolu
 
 ## Data
 Source data can be found at Zenodo (DOI:10.5281/zenodo.24174238). To reproduce our modeling/figures, download our data from Zenodo and place in the following directories:
-* Pik1_DEFT_Source_Data.zip (unzipped) in Data/source
-* YSD_Analysis_Source_Data.zip (unzipped) in YSD_Analysis/Data
+* Pik1_DEFT_Source_Data.zip (unzipped) in Data/source/
+* YSD_Analysis_Source_Data.zip (unzipped) in YSD_Analysis/Data/
 
 ## Analysis
 All analyses were completed in R or Python. RStudio was used to run the R scripts and Google Collab (T4 GPU) was used to run the Python scripts.
+
+## Outputs
+Model embeddings, weights, and figures can be found at Zenodo (DOI:10.5281/zenodo.24174238). To collect these script outputs, download our data from Zenodo and place in the following directories:
+* Pik1_DEFT_Outputs.zip (unzipped) in Outputs/
 
 ## Overview
 1. [Pik-1 variant calling](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/3kRGP): The 3,000 Rice Genomes Project dataset was searched for uncharacterized variants of the Pik-1 HMA domain to phenotype with our modeling.
