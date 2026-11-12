@@ -6,6 +6,9 @@ Source data can be found at Zenodo (DOI:10.5281/zenodo.24174238). To reproduce o
 * Pik1_DEFT_Source_Data.zip (unzipped) in Data/source
 * YSD_Analysis_Source_Data.zip (unzipped) in YSD_Analysis/Data
 
+## Analysis
+All analyses were completed in R or Python. RStudio was used to run the R scripts and Google Collab (T4 GPU) was used to run the Python scripts.
+
 ## Overview
 1. [Pik-1 variant calling](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/3kRGP): The 3,000 Rice Genomes Project dataset was searched for uncharacterized variants of the *Pik-1* ligand binding domain to phenotype with our modeling.
 2. [Model directed evolution data](https://github.com/alexanderjhoward/Pik1-DE-FT/tree/main/Pik1_DE-FT.ipynb): The protein language model ESM-2 was used to model Pik-1 binding against Avr-PikC and Avr-PikF. This modeling approach was also tested on the human enzyme NUDT15. Model performance is compared and visualized with this script.
