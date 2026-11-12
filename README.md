@@ -4,7 +4,7 @@ This repository contains all scripts used in the paper "Combining Directed Evolu
 ## Data
 Source data can be found at Zenodo (DOI:10.5281/zenodo.24174238). To reproduce our modeling/figures, download our data from Zenodo and place in the following directories:
 * Pik1_DEFT_Source_Data.zip (unzipped) in Data/source/
-* YSD_Analysis_Source_Data.zip (unzipped) in YSD_Analysis/Data/
+* YSD_Analysis_Source_Data.zip (unzipped) in YSD_Analysis/Source/
 
 ## Analysis
 All analyses were completed in R or Python. RStudio was used to run the R scripts and Google Collab (T4 GPU) was used to run the Python scripts.
