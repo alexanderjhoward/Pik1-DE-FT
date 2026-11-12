@@ -1,7 +1,7 @@
 # Calling *Pik-1* variants from the 3,000 Rice Genomes Project
 
 ## Background
-With our fine-tuned models finished, we wanted to apply them towards the phenotyping of naturally-evolved receptor variants. Our approach was to identify *Pik-1* ligand binding domain variants within the 3k RGP dataset with complete read coverage against a reference *Pik-1* allele and use those samples for variant calling. Later on in the project we also do variant calling on the full-length *Pik-1* and *Pik-2* receptor sequences to synthesize them for agroinfiltration HR assays. 
+We wanted to apply our modeling towards the phenotyping of naturally-evolved receptor variants. Our approach was to identify *Pik-1* ligand binding domain variants within the 3k RGP dataset with complete read coverage against a reference *Pik-1* allele and use those samples for variant calling. Later on in the project we also do variant calling on the full-length *Pik-1* and *Pik-2* receptor sequences to synthesize them for agroinfiltration HR assays. 
 
 ## Method
 
@@ -98,15 +98,5 @@ With all variant calling finished, the DNA and peptide sequences were collected 
 ```bash
 
     bash Scripts/format_output.sh
-
-```
-
-These sequences were cleaned and assembled with the **sequence_processing.R** script. The last step was to conduct a multiple sequence alignment with MUSCLE on the **Pikp_HMA_Variants_Unique.fasta** file for downstream plotting.
-
-```bash
-
-    muscle -in Output/Pikp1_HMA_Variants_Unique.fa -out Output/Data/Pikp1_HMA_Variants_Unique_Aligned.fa
-    sed 's/^>/\x00&/' Output/Pikp1_HMA_Variants_Unique_Aligned.fa | sort -z | tr -d '\0' | sed 's/^>..;/>/g' >  Output/Pikp1_HMA_Variants_Unique_Aligned_Formatted.fa
-    rm Output/Pikp1_HMA_Variants_Unique_Aligned.fa
 
 ```
