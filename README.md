@@ -1,4 +1,4 @@
-# Modeling *Pik-1* directed evolution data with fine-tuned ESM-2 models to phenotype naturally-evolved *Pik-1* variants
+# Modeling directed evolution data with ESM-2 to phenotype novel genomic variants of interest
 This repository contains all scripts used in the paper "Combining Directed Evolution with Machine Learning Enables Accurate Genotype-to-Phenotype Predictions".
 
 ## Data
