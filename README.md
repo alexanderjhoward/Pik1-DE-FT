@@ -11,7 +11,7 @@ All analyses were completed in R or Python. RStudio was used to run the R script
 
 ## Outputs
 Model embeddings, weights, and figures can be found at Zenodo (DOI:10.5281/zenodo.24174238). To collect these script outputs, download our data from Zenodo and place in the following directories:
-* Pik1_DEFT_Outputs.zip (unzipped) in Outputs/
+* Pik1_DEFT_Outputs.zip (unzipped) in Output/
 * YSD_Analysis_Outputs.zip (unzipped) in YSD_Analysis/Output/
 
 ## Overview
